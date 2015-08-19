@@ -29,6 +29,10 @@ h6 {
     color: #
 }
 
+li {
+	list-style: none;
+}
+
 p {
     font-size: 18px;
     line-height: 20px;
@@ -55,11 +59,11 @@ p {
 }
 
 .intro .intro-body .brand-heading {
-    font-size: 60px;
+    font-size: 40px;
 }
 
 .intro .intro-body .intro-text {
-    font-size: 30px;
+    font-size: 20px;
     color: #fff;
     height: 50px;
 }
