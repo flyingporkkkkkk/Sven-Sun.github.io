@@ -52,7 +52,7 @@ p {
     padding: 100px 0 200px 0;
     text-align: center;
     color: #fff;
-    background: url(/img/intro-bg.jpg) no-repeat center center scroll;
+    background: url(/img/bg.jpg) no-repeat center center scroll;
 }
 
 .intro .intro-body {
@@ -85,10 +85,15 @@ p {
     color: #fff;
     background: rgba(255,255,255,.3);
 }
+
 a {
     color: #FCFAF2;
 }
 
 a:hover {
     text-decoration: none;
+}
+
+img {
+    max-width: 100%;
 }
