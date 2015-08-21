@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Core Animation基础</title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="">
+    <link rel="canonical" href="/2015/08/21/Core%20Animation%E5%9F%BA%E7%A1%80.html">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+</head>
+    <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+        <header class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1 class="brand-heading">Sven</h1>
+                        <p class="intro-text">Youth is wasted on the young.</p>
+                        </a>
+                    </div>
+                    <div class="col-md-8 col-md-offset-2">
+                        <a href="/index.html"><span class="btn-circle">S</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div id="Post">
+    <div class="col-md-8 col-md-offset-2">
+	<h2 style="text-align:center; padding-bottom:50px">Core Animation基础</h2>
+	<div>Core Animation 提供了一个通用的系统来为应用中的视图和其他可见的部分布置动画</div>
+<div>Core Animation并不是应用视图的代替品，相反，它是一种与视图整合的技术来提供更有表现力的动画</div>
+<div>它通过缓存视图内容为可被图形硬件直接操作的位图来完成自己的行为</div>
+<div>一些情况下，这种缓存行为可能使你重新考虑如何展示和管理你应用的内容</div>
+<div>但大多数时间，你可以不加思考的使用Core Animation</div>
+<div>除了缓存视图内容，Core Animation也定义了声明可视化内容，将该内容与视图内容整合，与任何其他部件一起产生动画的方法。</div>
+<div><br/></div>
+<div>你使用Core Animation来动画改变应用视图和可视化对象</div>
+<div>大多数改变与修改可视化对象的属性有关</div>
+
+
+<div>例如，你可能通过Core Animation来动画改变视图的position，size，或者opacity</div>
+<div>当你改变了这些时，Core Animation会产生动画，将现在的属性值改变为你设置的新值</div>
+<div>你通常不会使用Core Animation来60次每秒的改变视图内容，就像卡通</div>
+<div>相反，你使用Core Animation在屏幕中移动视图内容，淡入淡出，提供任意的图形转化，或者改变视图的其他可视化属性</div>
+<div><br/></div>
+<div style="font-size: 29px; font-weight: 400; color: #BDC0BA; font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">
+<div>Layers Provide the Basis for Drawing and Animations</div>
+</div>
+<div>Layer对象是2D接口，是你在Core Animation中做一切行为的核心</div>
+<div>像视图一样，layer管理关于几何，内容，其他界面可视化属性的信息</div>
+<div>与视图不同的是，layer不定义自己的外观</div>
+<div>layer只管理位图的状态信息</div>
+<div>位图自己可以是视图绘制的结果，也可以是你声明赋值的图片</div>
+<div>因此，你在应用中使用的主要layer被认为是模型对象，因为它们只管理信息数据</div>
+<div><br/></div>
+<div style="font-size: 23px; font-weight: 400; color: rgb(0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">
+<div>The Layer-Based Drawing Model</div>
+</div>
+<div>应用中大多数layer不做任何实际的绘图工作</div>
+<div>相反，layer捕获应用提供的内容，并且将它缓存为位图，这有时被称为后台存储（backing store）</div>
+<div>当你随后改变layer的属性时，你所做的所有都是改变layer对象相关的状态信息</div>
+<div>当改变触发动画时，Croe Animation将layer的位图和状态信息传递给图形硬件，图形硬件使用新的信息来渲染位图</div>
+<div><br/></div>
+<div><img src="/img/6EBDED13-E9CB-48D2-931C-3F242FA60A49.png" height="266" width="721"/></div>
+<div><br/></div>
+<div>因为它操作的是静态位图，所以，基于图层的绘画显著区别于传统的基于视图的绘画技术</div>
+<div>在基于视图的绘画中，改变视图通常导致视图的drawRect：方法被调用来使用新参数重画视图内容</div>
+<div>但是这种绘画方式的消耗非常大，因为它的工作使用了主线程的CPU</div>
+<div>Core Animation避免了这种昂贵的开销，通过使用任何硬件可以操作缓存位图的时机达成了相同或相似的效果</div>
+<div><br/></div>
+<div style="font-size: 23px; font-weight: 400; color: rgb(0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">
+<div>Layer-Based Animations</div>
+</div>
+<div>layer对象的数据和状态信息与layer内容在屏幕上的视觉展示相分离</div>
+<div>这种分离给了Core Animation一种插入自己来动画改变旧状态值到新状态值的机会</div>
+<div>例如改变layer的position属性导致Core Animation将layer从现在的位置移动到新声明的位置</div>
+<div><br/></div>
+<div><img src="/img/F0D7B99D-CD3E-4547-93CB-F7A431836B4A.png" height="402" width="637"/></div>
+<div>在动画过程中，Core Animation为你在硬件中做了所有一帧一帧的绘画</div>
+<div>你要做的所有是声明动画的开始点和结束点，Core Animation做其他所有工作</div>
+<div>你也可以声明自定义动画时间和需要的动画参数，如果你不提供，Core Animation会提供合适的默认值</div>
+<div><br/></div>
+<div style="font-size: 29px; font-weight: 400; color: #BDC0BA; font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">
+<div>Layer Objects Define Their Own Geometry</div>
+</div>
+<div>layer的任务之一是管理它内容的可视化几何位置</div>
+<div>可视化集合位置包含的信息包括bounds，position，rotated，scaled，transformed</div>
+<div>像视图，layer有frame和bounds矩形来定位自己和内容</div>
+<div>layer也有视图没有的其他属性，像anchor point，定义了一个不动点</div>
+<div>你给layer几何部分的声明方式也不同于为视图的信息赋值</div>
+<div><br/></div>
+<div style="font-size: 23px; font-weight: 400; color: rgb(0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">
+<div>Layers Use Two Types of Coordinate Systems</div>
+</div>
+<div>layer使用两种类型的坐标系，基于点的坐标系与单元坐标系，来说明内容的位置</div>
+<div>使用哪种坐标系取决于被转化对信息的类型</div>
+<div>当声明的值直接与屏幕坐标匹配时使用基于点的坐标系，例如position属性</div>
+<div>当值不与屏幕坐标系匹配时使用单元坐标系，例如anchorPoint属性</div>
+<div><br/></div>
+<div>大多数基于点坐标系的使用是为了声明layer的size，position，bounds属性</div>
+<div>bounds定义了layer自己的坐标系且包含了layer在屏幕上的大小</div>
+<div>position定义了layer在父坐标系的位置</div>
+<div>尽管layer也有frame属性，但这个属性是由bounds和position转化而来，因此很少使用</div>
+<div><br/></div>
+<div>layer的bounds和frame矩形的朝向通常与平台的默认朝向相匹配</div>
+<div><br/></div>
+<div><img src="/img/DE5A7A9B-65B3-48EB-9582-C25BA7E89FD4.png" height="218" width="550"/></div>
+<div>图中需要注意的是，position属性位于layer的中心</div>
+<div>这个属性是一系列定义基于layer的anchorPoint属性值改变的属性之一</div>
+<div><br/></div>
+<div>anchorPoint是一系列你使用单元坐标系声明的属性之一</div>
+<div>Core Animation使用单元坐标系来展示属性，这些属性的值可能随着layer的size改变而改变</div>
+<div>你可以认为单元坐标系是一个百分比的坐标，包含了所有可能值</div>
+<div><br/></div>
+<div><img src="/img/A3321A11-8EF9-47BA-A34E-263700B0BE6D.png" height="202" width="462"/></div>
+<div>所有的坐标值，无论是点坐标还是单元坐标，都是浮点数</div>
+<div>使用浮点数让你更清晰的声明哪些位于常数坐标值之间的位置</div>
+<div>使用浮点数非常方便，尤其是在打印中或者当绘制一个点，这个点可能被Retina设备展示在多个像素上</div>
+<div><br/></div>
+<div style="font-size: 23px; font-weight: 400; color: rgb(0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">
+<div>Anchor Points Affect Geometric Manipulations</div>
+</div>
+<div>layer的几何操作与layer的anchorPoint有关</div>
+<div>当你操作layer的position或者transform属性时，anchorPoint的影响非常明显</div>
+<div>position属性通常与layer的anchorPoint有关，任何你做的transform的发生都与anchor有关</div>
+<div><br/></div>
+<div><img src="/img/FFE3FBAE-708B-40B9-9100-E5B68FAD69E2.png" height="726" width="652"/></div>
+<div>上图的anchorPoint影响了position</div>
+<div><img src="/img/4FCA364F-FC1E-45CB-B4BC-D91A8618100A.png" height="638" width="650"/></div>
+<div>上图anchorPoint影响了transform</div>
+<div><br/></div>
+<div style="font-size: 23px; font-weight: 400; color: rgb(0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">
+<div>Layers Can Be Manipulated in Three Dimensions</div>
+</div>
+<div>每个layer有两个转换矩阵，你可以使用它们来操作layer和它的内容</div>
+<div>transform属性声明了你想提供给你的layer和它包含的sublayer的转换</div>
+<div>通常当你想要修改layer自己的时候使用这个属性</div>
+<div>例如，你可能使用这个属性来放缩，旋转layer，或者临时改变它的position</div>
+<div>sublayerTransform属性定义了额外的transform仅应用于sublayer</div>
+<div>它通常被用于给一块布局的内容添加透视属性效果</div>
+<div><br/></div>
+<div>transform利用矩阵来操作坐标值得到新的坐标，新坐标就表示了变化后的位置</div>
+<div><br/></div>
+<div><img src="/img/B6A2B3F0-EB78-467A-8923-E626D6DECE14.png" height="261" width="570"/></div>
+<div>下图展示了一些非常通用的变化矩阵</div>
+<div><img src="/img/4180C7F2-CF21-464A-8022-F065596F819C.png" height="735" width="633"/></div>
+<div><br/></div>
+<div style="font-size: 29px; font-weight: 400; color: #BDC0BA; font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">
+<div>Layer Trees Reflect Different Aspects of the Animation State</div>
+</div>
+<div>一个使用Core Animation的应用有三组layer对象，每一组对象都为应用内容展现在屏幕上有重要作用</div>
+<ul>
+<li>model layer tree的对象是你应用交互最多的对象，存储了任何动画的目标值，无论何时你改变了layer的属性，你都用到了这些对象之一</li>
+<li>presentation tree的对象包含了任何执行中的动画的动态值，存储了动画的当前状态值，你永远不要修改这些对象，你使用这些对象来读取当前动画值</li>
+<li>render tree对象显示实际动画，被提供给Core Animation</li>
+</ul>
+<div>每一组layer对象都被组织成层级结构，就像你应用中的视图</div>
+<div>实际上，对于一个为所有视图都激活了layer点应用，每个tree的初始结构准确的匹配了视图层级的结构</div>
+<div>然而，应用可以添加而外的layer对象，这说明layer不与view中的layer有必要联系</div>
+<div>你可能偶尔为了优化应用内容展示而这样做</div>
+<div><br/></div>
+<div><img src="/img/D0930BBA-83EB-4E00-89C7-4A5A88CBBF44.png" height="400" width="700" /></div>
+<div>上图中，window包含一个contentView，这个contentView包含了一个button和两个独立点layer对象。</div>
+<div>每个view都有一个匹配点layer对象，组成了layer层级的一部分</div>
+<div><br/></div>
+<div>对于layer tree中的每一个对象，在presentation和render trees中都有匹配的对象</div>
+<div>下图展示了这点</div>
+<div><br/></div>
+<div><img src="/img/BEEE304A-809F-449B-A1D0-5521638C895C.png" height="550" width="700"/></div>
+<div><br/></div>
+<div style="font-size: 29px; font-weight: 400; color: #BDC0BA: 2px; font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">
+<div>The Relationship Between Layers and Views</div>
+</div>
+<div>layer不是应用中view的代替品，这就是说，你不能只用layer对象创建一个可视化界面</div>
+<div>layer为你的view提供了基础设施</div>
+<div>尤其，layer让view内容的绘制和动画更加简单，高效，且在执行这些时维持了高帧率</div>
+<div>然而，有许多事情layer不做，layer不处理事件，不绘制内容，不参与响应者链，还有其他许多事情不做</div>
+<div>因此，每个应用必须仍然有一个或几个view来处理这些事情</div>
+<div><br/></div>
+<div>在iOS中，每个view都有一个对应的layer对象，但OS X中你必须决定哪些view应该拥有layer</div>
+<div>在OS X v10.8和其后的版本，为所有view添加layer很有意义</div>
+<div>然而，你没有被要求这么做，你仍然可以在不需要的地方不使用layer</div>
+<div>layer的确增加了你应用的内存开支，但它们通常是有益多于缺点，因此在禁用layer之前最好经常测试一下应用的性能</div>
+<div><br/></div>
+<div>当你允许了view的layer支持，你创建了被称为layer－backed view</div>
+<div>在这种view中，系统负责创建底部的layer对象，并保存layer与相对应的view同步</div>
+<div>所有iOS视图都是这种类型的，大部分OS X中的view也是</div>
+<div>然而，在OS X中，你也可以创建layer－hosting view，这是一种你自己提供layer的视图</div>
+<div>对于这种视图，AppKit提供了一种方便的方法来管理layer，不需要为了响应view改变而修改它</div>
+<div><br/></div>
+<div>除了与view相联系的layer，你也可以创建没有想对应的view的layer对象</div>
+<div>你可以把这些独立的layer嵌入应用中的任何layer中，包括那些与view有联系的layer</div>
+<div>你通常使用独立layer作为优化方式的部分</div>
+<div>例如，如果你想要在不同地方使用同一张图片</div>
+<div>你可以先加载一遍图片，并将它关联到多个独立的layer上，然后在不同地方使用这些layer对象</div>
+<div>这样每个layer都引用同一个图像资源，而不是在内存中各自创建一份图片的copy</div>
+</div>
+    </div>
+        <!-- Footer -->
+    <footer>
+        <div class="col-xs-12" style="text-align: center; height: 100px;padding-top: 70px;font-size: 10px">
+            <p>Copyright &copy; Sven 2015</p>
+        </div>
+    </footer>
+
+    </body>
+</html>
