@@ -38,11 +38,6 @@ p {
     line-height: 20px;
 }
 
-#Post {
-    border-color: #fff;
-    border-width: 5px;
-}
-
 .intro {
     display: table;
     width: 100%;
