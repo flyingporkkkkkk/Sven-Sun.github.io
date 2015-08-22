@@ -6,9 +6,9 @@
 body {
     width: 100%;
     height: 100%;
-    font-family: Lora,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    color: #B4A582;
-    background-color: #787D7B;
+    font-family: Msyh,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #242424;
+    background-color: #FCFAF2;
 }
 
 html {
@@ -66,21 +66,21 @@ p {
     height: 70px;
     margin-top: 100px;
     padding: 7px 16px;
-    border: 2px solid #fff;
+    border: 2px solid #FCFAF2;
     border-radius: 35px;
     font-size: 25px;
-    color: #fff;
+    color: #FCFAF2;
     transition: background .3s ease-in-out;
 }
 
 .btn-circle:hover,
 .btn-circle:focus {
-    color: #fff;
+    color: #FCFAF2;
     background: rgba(255,255,255,.3);
 }
 
 a {
-    color: #FCFAF2;
+    color: #242424;
 }
 
 a:hover {

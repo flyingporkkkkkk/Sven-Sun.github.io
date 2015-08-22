@@ -18,7 +18,7 @@ title : Core Animation基础
 <div>你通常不会使用Core Animation来60次每秒的改变视图内容，就像卡通</div>
 <div>相反，你使用Core Animation在屏幕中移动视图内容，淡入淡出，提供任意的图形转化，或者改变视图的其他可视化属性</div>
 <div><br/></div>
-<div style="font-size: 29px; font-weight: 400; color: #BDC0BA; font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;">
+<div style="font-size: 29px; font-weight: 400;">
 <div>Layers Provide the Basis for Drawing and Animations</div>
 </div>
 <div>Layer对象是2D接口，是你在Core Animation中做一切行为的核心</div>
@@ -28,7 +28,7 @@ title : Core Animation基础
 <div>位图自己可以是视图绘制的结果，也可以是你声明赋值的图片</div>
 <div>因此，你在应用中使用的主要layer被认为是模型对象，因为它们只管理信息数据</div>
 <div><br/></div>
-<div style="font-size: 23px; font-weight: 400; color: rgb(0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;">
+<div style="font-size: 23px; font-weight: 400;">
 <div>The Layer-Based Drawing Model</div>
 </div>
 <div>应用中大多数layer不做任何实际的绘图工作</div>
@@ -43,7 +43,7 @@ title : Core Animation基础
 <div>但是这种绘画方式的消耗非常大，因为它的工作使用了主线程的CPU</div>
 <div>Core Animation避免了这种昂贵的开销，通过使用任何硬件可以操作缓存位图的时机达成了相同或相似的效果</div>
 <div><br/></div>
-<div style="font-size: 23px; font-weight: 400; color: rgb(0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;">
+<div style="font-size: 23px; font-weight: 400;">
 <div>Layer-Based Animations</div>
 </div>
 <div>layer对象的数据和状态信息与layer内容在屏幕上的视觉展示相分离</div>
@@ -55,7 +55,7 @@ title : Core Animation基础
 <div>你要做的所有是声明动画的开始点和结束点，Core Animation做其他所有工作</div>
 <div>你也可以声明自定义动画时间和需要的动画参数，如果你不提供，Core Animation会提供合适的默认值</div>
 <div><br/></div>
-<div style="font-size: 29px; font-weight: 400; color: #BDC0BA; font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;">
+<div style="font-size: 29px; font-weight: 400;">
 <div>Layer Objects Define Their Own Geometry</div>
 </div>
 <div>layer的任务之一是管理它内容的可视化几何位置</div>
@@ -64,7 +64,7 @@ title : Core Animation基础
 <div>layer也有视图没有的其他属性，像anchor point，定义了一个不动点</div>
 <div>你给layer几何部分的声明方式也不同于为视图的信息赋值</div>
 <div><br/></div>
-<div style="font-size: 23px; font-weight: 400; color: rgb(0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;">
+<div style="font-size: 23px; font-weight: 400;">
 <div>Layers Use Two Types of Coordinate Systems</div>
 </div>
 <div>layer使用两种类型的坐标系，基于点的坐标系与单元坐标系，来说明内容的位置</div>
@@ -92,7 +92,7 @@ title : Core Animation基础
 <div>使用浮点数让你更清晰的声明哪些位于常数坐标值之间的位置</div>
 <div>使用浮点数非常方便，尤其是在打印中或者当绘制一个点，这个点可能被Retina设备展示在多个像素上</div>
 <div><br/></div>
-<div style="font-size: 23px; font-weight: 400; color: rgb(0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;">
+<div style="font-size: 23px; font-weight: 400;">
 <div>Anchor Points Affect Geometric Manipulations</div>
 </div>
 <div>layer的几何操作与layer的anchorPoint有关</div>
@@ -104,7 +104,7 @@ title : Core Animation基础
 <div><img src="{{site.url}}/img/4FCA364F-FC1E-45CB-B4BC-D91A8618100A.png"/></div>
 <div>上图anchorPoint影响了transform</div>
 <div><br/></div>
-<div style="font-size: 23px; font-weight: 400; color: rgb(0, 0, 0); font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;">
+<div style="font-size: 23px; font-weight: 400;">
 <div>Layers Can Be Manipulated in Three Dimensions</div>
 </div>
 <div>每个layer有两个转换矩阵，你可以使用它们来操作layer和它的内容</div>
@@ -120,7 +120,7 @@ title : Core Animation基础
 <div>下图展示了一些非常通用的变化矩阵</div>
 <div><img src="{{site.url}}/img/4180C7F2-CF21-464A-8022-F065596F819C.png"/></div>
 <div><br/></div>
-<div style="font-size: 29px; font-weight: 400; color: #BDC0BA; font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif;">
+<div style="font-size: 29px; font-weight: 400;">
 <div>Layer Trees Reflect Different Aspects of the Animation State</div>
 </div>
 <div>一个使用Core Animation的应用有三组layer对象，每一组对象都为应用内容展现在屏幕上有重要作用</div>
@@ -143,7 +143,7 @@ title : Core Animation基础
 <div><br/></div>
 <div><img src="{{site.url}}/img/BEEE304A-809F-449B-A1D0-5521638C895C.png"/></div>
 <div><br/></div>
-<div style="font-size: 29px; font-weight: 400; color: #BDC0BA: 2px; font-family: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, Verdana, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">
+<div style="font-size: 29px; font-weight: 400;">
 <div>The Relationship Between Layers and Views</div>
 </div>
 <div>layer不是应用中view的代替品，这就是说，你不能只用layer对象创建一个可视化界面</div>
